@@ -1,7 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import { IsArray, ArrayMinSize, ValidateNested, IsOptional } from "class-validator";
-import { IngredientDto } from "src/modules/posts/dtos/create-post.dto";
 
 export class GetRecipeDto {
     @ApiProperty({
@@ -13,11 +12,7 @@ export class GetRecipeDto {
             { name: 'Hành tím', quantity: '2 củ' }
         ]
     })
-    @IsArray()
-    @ArrayMinSize(1)
-    @ValidateNested({ each: true })
-    @Type(() => IngredientDto)
-    ingredients: IngredientDto[];
+    
 
     @ApiProperty({
         description: 'Danh sách tên các món ăn cần nấu từ những nguyên liệu trên',

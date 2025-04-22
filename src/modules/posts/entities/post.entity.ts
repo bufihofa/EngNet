@@ -27,8 +27,6 @@ import {
     @Column('text')
     description: string;
   
-    @Column({ nullable: true })
-    cookTime: string;
   
     @Column({default: 0})
     totalLike: number;
@@ -43,12 +41,6 @@ import {
     @Column({default: 0})
     baseScore: number;
 
-    @Column('simple-json', { nullable: true })
-    ingredient: { 
-      name: string; 
-      quantity: string; 
-    }[];
-  
     @Column('simple-json', { nullable: true })
     steps: string[];
   
