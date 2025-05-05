@@ -366,9 +366,11 @@ export class PostsService {
         .select(['user.id', 'viewedPosts', 'following', 'followingUser.id'])
         .where('user.id = :userId', { userId })
         .getOne();
+      
       const followedUserIds = user.following.map(f => f.following.id);
       const viewedPostIds = user.viewedPosts.map(p => p.id);
-
+      console.log(followedUserIds);
+      console.log(viewedPostIds);
       const query = this.postsRepository.createQueryBuilder('post')
         .leftJoinAndSelect('post.author', 'author');
 
@@ -378,9 +380,10 @@ export class PostsService {
         query.where('1=1');
       }
 
-      query.orWhere('post.authorId = :userId AND post.totalComment > 0', { userId });
+      
 
       const posts = await query.getMany();
+      console.log(posts);
       // Get posts and calculate scores
       const scoredPosts = posts.map(post => {
         const isMine = (post.author.id==userId) ? 0 : 1;
@@ -398,7 +401,7 @@ export class PostsService {
     
       // Add new posts to viewed posts
       const newViewedPosts = topPosts
-        .filter(sp => sp.post.author.id !== userId) // Don't track own posts
+        //.filter(sp => sp.post.author.id !== userId) // Don't track own posts
         .map(sp => sp.post);
         
       if (newViewedPosts.length > 0) {
