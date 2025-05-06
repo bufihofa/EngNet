@@ -54,7 +54,16 @@ import {
       const result = await this.postsService.getNewsfeed(req.user.id, limit);
       return result;
     }
-
+    @ApiBearerAuth()
+    @UseGuards(JwtAuthGuard)
+    @Get('newsfeedf/:limit')
+    @ApiOperation({ summary: 'Lấy newsfeed following theo limit' })
+    @ApiResponse({ status: 200, description: 'NewsfeedF' })
+    @ApiResponse({ status: 404, description: 'Error' })
+    async getNewsfeedF(@Request() req, @Param('limit') limit: number) {
+      const result = await this.postsService.getNewsfeedFollowing(req.user.id, limit);
+      return result;
+    }
 
 
 

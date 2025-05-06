@@ -55,7 +55,7 @@ export class PostsService {
     await this.postsRepository.save(post);
     return { message: 'Tạo bài viết thành công.', post: new FullReponsePostDto(post) };
   }
-
+  
   async updatePost(postId: number, updatePostDto: UpdatePostDto, userId: number): Promise<any> {
     const post = await this.postsRepository.findOne({ where: { id: postId } });
     if (!post) {
@@ -369,8 +369,6 @@ export class PostsService {
       
       const followedUserIds = user.following.map(f => f.following.id);
       const viewedPostIds = user.viewedPosts.map(p => p.id);
-      console.log(followedUserIds);
-      console.log(viewedPostIds);
       const query = this.postsRepository.createQueryBuilder('post')
         .leftJoinAndSelect('post.author', 'author');
 
@@ -383,7 +381,7 @@ export class PostsService {
       
 
       const posts = await query.getMany();
-      console.log(posts);
+      //console.log(posts);
       // Get posts and calculate scores
       const scoredPosts = posts.map(post => {
         const isMine = (post.author.id==userId) ? 0 : 1;
@@ -414,6 +412,56 @@ export class PostsService {
       console.log(error);
     }
   }
+
+  async getNewsfeedFollowing(userId: number, limit: number): Promise<any> {
+    try {
+      const user = await this.usersRepository
+        .createQueryBuilder('user')
+        .leftJoinAndSelect('user.viewedPosts', 'viewedPosts')
+        .leftJoinAndSelect('user.following', 'following')
+        .leftJoinAndSelect('following.following', 'followingUser')
+        .select(['user.id', 'viewedPosts', 'following', 'followingUser.id'])
+        .where('user.id = :userId', { userId })
+        .getOne();
+
+      const followedUserIds = user.following.map(f => f.following.id);
+      const viewedPostIds = user.viewedPosts.map(p => p.id);
+
+      // If the user is not following anyone, return an empty array
+      if (followedUserIds.length === 0) {
+        return [];
+      }
+
+      const query = this.postsRepository.createQueryBuilder('post')
+        .leftJoinAndSelect('post.author', 'author')
+        .where('author.id IN (:...followedUserIds)', { followedUserIds }); // Filter by followed users
+
+      if (viewedPostIds.length > 0) {
+        query.andWhere('post.id NOT IN (:...viewedPostIds)', { viewedPostIds }); // Exclude viewed posts
+      }
+
+      const posts = await query
+        .orderBy('post.createdAt', 'DESC') // Order by creation date, newest first
+        .take(limit) // Apply limit directly in the query
+        .getMany();
+
+      // Add new posts to viewed posts
+      const newViewedPosts = posts
+        .map(sp => sp); // No need to filter own posts if only showing followed
+
+      if (newViewedPosts.length > 0) {
+        user.viewedPosts.push(...newViewedPosts);
+        await this.usersRepository.save(user); // Use await here
+      }
+
+      return posts.map(post => new LiteReponsePostDto(post));
+    } catch (error) {
+      console.log(error);
+      // Consider throwing an error or returning a specific error response
+      throw new Error('Failed to fetch following newsfeed.');
+    }
+  }
+  
   async createComment(postId: number, createCommentDto: CreateCommentDto, userId: number): Promise<any> {
     const post = await this.postsRepository
       .createQueryBuilder('post')
