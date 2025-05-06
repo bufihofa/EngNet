@@ -399,8 +399,8 @@ export class PostsService {
     
       // Add new posts to viewed posts
       const newViewedPosts = topPosts
-        //.filter(sp => sp.post.author.id !== userId) // Don't track own posts
-        .map(sp => sp.post);
+        .map(sp => sp.post)
+        .filter(post => !user.viewedPosts.some(viewedPost => viewedPost.id === post.id));
         
       if (newViewedPosts.length > 0) {
         user.viewedPosts.push(...newViewedPosts);
@@ -446,8 +446,9 @@ export class PostsService {
         .getMany();
 
       // Add new posts to viewed posts
-      const newViewedPosts = posts
-        .map(sp => sp); // No need to filter own posts if only showing followed
+      const newViewedPosts = posts.filter(
+        post => !user.viewedPosts.some(viewedPost => viewedPost.id === post.id)
+      );
 
       if (newViewedPosts.length > 0) {
         user.viewedPosts.push(...newViewedPosts);
