@@ -404,7 +404,7 @@ export class PostsService {
         
       if (newViewedPosts.length > 0) {
         user.viewedPosts.push(...newViewedPosts);
-        this.usersRepository.save(user);
+        await this.usersRepository.save(user);
       }
     
       return topPosts.map(sp => new LiteReponsePostDto(sp.post));
@@ -461,7 +461,7 @@ export class PostsService {
       throw new Error('Failed to fetch following newsfeed.');
     }
   }
-  
+
   async createComment(postId: number, createCommentDto: CreateCommentDto, userId: number): Promise<any> {
     const post = await this.postsRepository
       .createQueryBuilder('post')

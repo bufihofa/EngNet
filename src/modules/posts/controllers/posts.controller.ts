@@ -51,6 +51,7 @@ import {
     @ApiResponse({ status: 200, description: 'Newsfeed' })
     @ApiResponse({ status: 404, description: 'Error' })
     async getNewsfeed(@Request() req, @Param('limit') limit: number) {
+      if(limit > 20) limit = 20;
       const result = await this.postsService.getNewsfeed(req.user.id, limit);
       return result;
     }
@@ -61,6 +62,7 @@ import {
     @ApiResponse({ status: 200, description: 'NewsfeedF' })
     @ApiResponse({ status: 404, description: 'Error' })
     async getNewsfeedF(@Request() req, @Param('limit') limit: number) {
+      if(limit > 20) limit = 20;
       const result = await this.postsService.getNewsfeedFollowing(req.user.id, limit);
       return result;
     }
