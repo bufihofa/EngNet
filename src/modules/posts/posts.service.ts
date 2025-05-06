@@ -461,6 +461,20 @@ export class PostsService {
       throw new Error('Failed to fetch following newsfeed.');
     }
   }
+  async recountComment(): Promise<any> {
+    console.log('Recounting comments...');
+    const posts = await this.postsRepository.find({ relations: ['comments', 'likes'] });
+    for (const post of posts) {
+      console.log(`Post ID: ${post.id}, Comment Count: ${post.comments.length}`);
+      post.totalComment = post.comments.length;
+      post.totalLike = post.likes.length;
+      post.totalView = Math.floor(post.totalLike*1.1+post.totalComment*1.2 + Math.random()*30);
+    }
+    await this.postsRepository.save(posts);
+    return { message: 'Đã đếm lại số lượng bình luận cho tất cả bài viết.' };
+  }
+  
+
 
   async createComment(postId: number, createCommentDto: CreateCommentDto, userId: number): Promise<any> {
     const post = await this.postsRepository

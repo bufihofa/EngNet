@@ -166,6 +166,11 @@ import {
     getCommentsWithLike(@Param('postId') postId: number, @Param('userId') userId: number, @Param('page') page: number) {
       return this.postsService.getComments(postId, userId, page);
     }
+    @Get('comment/recount')
+    @ApiOperation({ summary: 'Đếm bình luận của bài viết' })
+    recountComment(){
+      return this.postsService.recountComment();
+    }
     @ApiBearerAuth()
     @UseGuards(JwtAuthGuard)
     @Post('comment/:postId')
