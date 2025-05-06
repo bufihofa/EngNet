@@ -153,6 +153,7 @@ export class PostsService {
     }
   }
   async likePost(postId: number, userId: number): Promise<any> {
+    const now = new Date();
     const post = await this.postsRepository
       .createQueryBuilder('post')
       .leftJoin('post.likes', 'likes')
@@ -160,7 +161,8 @@ export class PostsService {
       .select(['post', 'likes.id', 'author.id'])
       .where('post.id = :id', { id: postId })
       .getOne();
-    
+    const now2 = new Date();
+    console.log('Time taken to fetch post:', now2.getTime() - now.getTime(), 'ms');
     if (!post) {
       throw new NotFoundException('Bài viết không tồn tại.');
     }
