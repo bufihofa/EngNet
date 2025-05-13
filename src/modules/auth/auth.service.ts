@@ -156,7 +156,7 @@ export class AuthService {
               <p style="color: #555555; font-size: 16px; line-height: 1.6;">
                 Liên kết xác thực không hợp lệ hoặc đã hết hạn. Vui lòng yêu cầu gửi lại email xác thực hoặc liên hệ hỗ trợ.
               </p>
-              <footer style="margin-top: 40px; color: #888888; font-size: 14px;">&copy; 2024 CookBook. Tất cả các quyền được bảo lưu.</footer>
+              <footer style="margin-top: 40px; color: #888888; font-size: 14px;">&copy; 2024 EngNet. Tất cả các quyền được bảo lưu.</footer>
             </div>
           </body>
         </html>
@@ -184,10 +184,10 @@ export class AuthService {
               <strong>Email:</strong> ${user.email}
             </p>
             <p style="color: #555555; font-size: 16px; line-height: 1.6;">
-              Cảm ơn bạn đã xác thực email của mình. Bây giờ bạn có thể truy cập đầy đủ các tính năng của CookBook và bắt đầu khám phá những công thức nấu ăn tuyệt vời!
+              Cảm ơn bạn đã xác thực email của mình. Bây giờ bạn có thể truy cập đầy đủ các tính năng của EngNet và bắt đầu khám phá những công thức nấu ăn tuyệt vời!
             </p>
-            <a href="https://www.cookbook.com" style="display: inline-block; padding: 12px 24px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px; margin-top: 30px;">Về Trang Chủ</a>
-            <footer style="margin-top: 40px; color: #888888; font-size: 14px;">&copy; 2024 CookBook. Tất cả các quyền được bảo lưu.</footer>
+            <a href="https://www.EngNet.com" style="display: inline-block; padding: 12px 24px; background-color: #28a745; color: #ffffff; text-decoration: none; border-radius: 5px; font-size: 16px; margin-top: 30px;">Về Trang Chủ</a>
+            <footer style="margin-top: 40px; color: #888888; font-size: 14px;">&copy; 2024 EngNet. Tất cả các quyền được bảo lưu.</footer>
           </div>
         </body>
       </html>
