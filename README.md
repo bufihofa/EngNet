@@ -204,3 +204,16 @@ Please ensure your code adheres to the project's coding standards (ESLint, Prett
 *   [Google Gemini API](https://ai.google.dev/) - For AI-powered features.
 *   [Nodemailer](https://nodemailer.com/) (or similar) - For sending emails.
 
+
+
+
+
+
+<a href="https://ibb.co/k65R4nK0"><img src="https://i.ibb.co/jZbcyKhG/01.png" alt="01" border="0"></a>
+<a href="https://ibb.co/ymqZHjgY"><img src="https://i.ibb.co/RGcsRwQB/02.png" alt="02" border="0"></a>
+<a href="https://ibb.co/1JByBk73"><img src="https://i.ibb.co/wr8G8fBT/03.png" alt="03" border="0"></a>
+<a href="https://ibb.co/1fHCwMWn"><img src="https://i.ibb.co/jv7C1zX5/04.png" alt="04" border="0"></a>
+<a href="https://ibb.co/ccZ287Yr"><img src="https://i.ibb.co/JRGrpM3s/05.png" alt="05" border="0"></a>
+<a href="https://ibb.co/21np3mk7"><img src="https://i.ibb.co/JwBSj0sR/06.png" alt="06" border="0"></a>
+<a href="https://ibb.co/Vp091D4F"><img src="https://i.ibb.co/dJsMT6YN/07.png" alt="07" border="0"></a>
+<a href="https://ibb.co/B530PWLN"><img src="https://i.ibb.co/q3jTnqB5/08.png" alt="08" border="0"></a>
