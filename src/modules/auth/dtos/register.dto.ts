@@ -6,11 +6,11 @@ export class RegisterDto {
   @IsString()
   @MinLength(3)
   @MaxLength(30)
-  @ApiProperty({ description: 'Tên đăng nhập', example: 'hoapri123' })
+  @ApiProperty({ description: 'Tên đăng nhập', example: 'hoapri123v' })
   username: string;
 
   @IsEmail()
-  @ApiProperty({ description: 'Email', example: 'hoapri123@gmail.com' })
+  @ApiProperty({ description: 'Email', example: 'hoapri123v@gmail.com' })
   email: string;
 
   @IsString()

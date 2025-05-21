@@ -6,7 +6,7 @@ export class LoginDto {
   @IsString()
   @MinLength(3)
   @MaxLength(30)
-  @ApiProperty({ description: 'Tên đăng nhập', example: 'hoapri123'})
+  @ApiProperty({ description: 'Tên đăng nhập', example: 'username20'})
   username: string;
 
   @IsString()
